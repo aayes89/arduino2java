@@ -8,11 +8,12 @@ Scanner in;
 SerialPort sp;
 CommPortIdentifier cpi;
 int timeout = 1000;
-int bitrate = 115200; // 9600
+int bitrate = 115200; // 9600 bps
 try{
  Enumeration ePorts = CommPortIdentifier.getPortIdentifiers();
  // Use this line code one time for COM port discover
  // ePorts.asIterator().forEachRemaining(id-> System.out.println((CommPortIdentifier) id).getName()));
+ 
  while( ePorts.hasMoreElements() ){
    cpi = (CommPortIdentifier)ePorts.nextElement();
    if( cpi.getName().contains(" name_of_port ") ){
@@ -20,12 +21,15 @@ try{
       break; 
    }
  }
+ 
  if( sp != null ){
    sp.setSerialPortParams(bitrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
    in = new Scanner( sp.getInputStream() );
+  // shows data readed
    while( in.hasNext() ){
      System.out.println( in.nextLine() );
    }
+  // close the connection
    sp.close();
  }
 } catch (AWTException | PortInUseException | IOException | UnsupportedCommOperationException ex ){
