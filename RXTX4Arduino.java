@@ -11,7 +11,8 @@ int timeout = 1000;
 int bitrate = 115200; // 9600
 try{
  Enumeration ePorts = CommPortIdentifier.getPortIdentifiers();
-// ePorts.asIterator().forEachRemaining(id-> System.out.println((CommPortIdentifier) id).getName()));
+ // Use this line code one time for COM port discover
+ // ePorts.asIterator().forEachRemaining(id-> System.out.println((CommPortIdentifier) id).getName()));
  while( ePorts.hasMoreElements() ){
    cpi = (CommPortIdentifier)ePorts.nextElement();
    if( cpi.getName().contains(" name_of_port ") ){
